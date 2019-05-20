@@ -13,6 +13,8 @@ public class JH_Camera_Controls : MonoBehaviour
     public float cameraSpeed;
     public float cameraRotation;
     public float cameraZoomSpeed;
+    private float startCameraSpeed;
+    private float startCameraRotation;
 
     [Header("Zooming")]
     public float maxZoom;
@@ -32,6 +34,8 @@ public class JH_Camera_Controls : MonoBehaviour
         go_camera = transform.GetChild(0).gameObject;
         go_cameraParent = transform.parent.gameObject;
         cameraZoom = Mathf.RoundToInt(transform.localPosition.y);
+        startCameraSpeed = cameraSpeed;
+        startCameraRotation = cameraRotation;
     }
 
     // Update is called once per frame
@@ -43,12 +47,30 @@ public class JH_Camera_Controls : MonoBehaviour
 
     void CameraLocked()
     {
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            cameraSpeed = startCameraSpeed * 2;
+            cameraRotation = startCameraRotation * 1.5f;
+        }
+        else
+        {
+            cameraSpeed = startCameraSpeed;
+            cameraRotation = startCameraRotation;
+        }
+
         // Defines Speed of Camera (only moves forward/back & left/right, no up/down.) public variable that can be changed in editor
         transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed, 
                                         0, 
                                         Input.GetAxis("Vertical") * cameraSpeed));
         // Defines Rotation of Camera (Q&E) public variable that can be changed in editor
         transform.Rotate(new Vector3(0, Input.GetAxis("Rotation") * cameraRotation, 0));
+
+        // Stops the camera from being able to move too far away
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -maxDistance, maxDistance);
+        clampedPosition.z = Mathf.Clamp(clampedPosition.z, -maxDistance, maxDistance);
+        transform.position = clampedPosition;
 
         cameraZoom = Mathf.Clamp(cameraZoom += Input.GetAxis("Mouse ScrollWheel"), minZoom, maxZoom);
         Vector3 zoomCamera = new Vector3(transform.localPosition.x, cameraZoom, transform.localPosition.z);
