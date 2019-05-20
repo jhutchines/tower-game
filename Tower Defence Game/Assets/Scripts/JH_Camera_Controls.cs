@@ -7,6 +7,7 @@ public class JH_Camera_Controls : MonoBehaviour
     private GameObject go_camera;
     private GameObject go_cameraParent;
     public float fl_doubleClickTime;
+    public float fl_countTime;
 
     [Header("Camera Speed")]
     public float cameraSpeed;
@@ -18,8 +19,10 @@ public class JH_Camera_Controls : MonoBehaviour
     public float minZoom;
     private float cameraZoom;
 
+    [Header("Clamps")]
+    public float maxDistance;
+
     private bool bl_countTime;
-    public float fl_countTime;
     private bool bl_moveTowards;
     private GameObject go_moveTowards;
     private float fl_zoomSpeed;
@@ -56,14 +59,16 @@ public class JH_Camera_Controls : MonoBehaviour
 
     void ZoomCamera()
     {
-
+        // When click is released, zoom in on a defined object such as "tower"
         if (Input.GetMouseButtonUp(0))
         {
 
-
+            // Convert current camera position of mouse on screen, moves forward towards objects selected
+            // Starts ray at mouse position to check what the player has clicked on
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
             {
+                // Remember to check for components instead of tags, as more efficient
                 if (hit.transform.tag == "Tower")
                 {
                     go_moveTowards = hit.transform.GetChild(0).GetChild(0).gameObject;
@@ -75,13 +80,10 @@ public class JH_Camera_Controls : MonoBehaviour
                     }
                     bl_countTime = true;
                 }
-                else
-                {
-                    go_moveTowards = null;
-                }
             }
         }
 
+        // Counts time between clicks
         if (bl_countTime)
         {
             fl_countTime += Time.deltaTime;
@@ -93,13 +95,15 @@ public class JH_Camera_Controls : MonoBehaviour
         }
 
         
-
+        // If movetowards has a value
         if (go_moveTowards != null)
         {
-            
+            // Activate movetowards, if player has double clicked
             if (bl_moveTowards)
             {
                 transform.position = Vector3.MoveTowards(transform.position, go_moveTowards.transform.position, fl_zoomSpeed);
+                // Sets zoom to 20 if it was greater than 30
+                if (transform.position == go_moveTowards.transform.position && cameraZoom > 30) cameraZoom = 20;
             }
             else
             {
@@ -117,6 +121,5 @@ public class JH_Camera_Controls : MonoBehaviour
                 }
             }
         }
-        else bl_moveTowards = false;
     }
 }
