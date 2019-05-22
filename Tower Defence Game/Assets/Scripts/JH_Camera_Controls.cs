@@ -6,6 +6,7 @@ public class JH_Camera_Controls : MonoBehaviour
 {
     private GameObject go_camera;
     private GameObject go_cameraParent;
+    private JH_Game_Manager gameManager;
     public float fl_doubleClickTime;
     public float fl_countTime;
 
@@ -30,6 +31,7 @@ public class JH_Camera_Controls : MonoBehaviour
     private bool bl_countTime;
     private bool bl_moveTowards;
     public GameObject go_moveTowards;
+    private GameObject go_previouslySelected;
     private float fl_zoomSpeed;
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,7 @@ public class JH_Camera_Controls : MonoBehaviour
         cameraZoom = Mathf.RoundToInt(transform.localPosition.y);
         startCameraSpeed = cameraSpeed;
         startCameraRotation = cameraRotation;
+        gameManager = Camera.main.GetComponent<JH_Game_Manager>();
     }
 
     // Update is called once per frame
@@ -110,6 +113,15 @@ public class JH_Camera_Controls : MonoBehaviour
                     }
                     bl_countTime = true;
                 }
+
+                if (gameManager.inBattle)
+                {
+                    if (hit.transform.GetComponent<JH_Unit>() != null)
+                    {
+                        gameManager.selectedUnit = hit.transform.gameObject;
+                    }
+                    else gameManager.selectedUnit = null;
+                }
             }
         }
 
@@ -121,7 +133,8 @@ public class JH_Camera_Controls : MonoBehaviour
             {
                 bl_countTime = false;
                 fl_countTime = 0;
-                if (!bl_moveTowards) OpenTowerUI();
+                if (!bl_moveTowards && (go_moveTowards == go_previouslySelected || go_previouslySelected == null)) OpenTowerUI();
+                go_previouslySelected = go_moveTowards;
             }
         }
 
