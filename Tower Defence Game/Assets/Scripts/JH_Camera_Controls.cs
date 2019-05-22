@@ -24,9 +24,12 @@ public class JH_Camera_Controls : MonoBehaviour
     [Header("Clamps")]
     public float maxDistance;
 
+    [Header("UI")]
+    public GameObject towerUI;
+
     private bool bl_countTime;
     private bool bl_moveTowards;
-    private GameObject go_moveTowards;
+    public GameObject go_moveTowards;
     private float fl_zoomSpeed;
     // Start is called before the first frame update
     void Start()
@@ -76,7 +79,11 @@ public class JH_Camera_Controls : MonoBehaviour
         Vector3 zoomCamera = new Vector3(transform.localPosition.x, cameraZoom, transform.localPosition.z);
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, zoomCamera, cameraZoomSpeed);
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) bl_moveTowards = false;
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && bl_moveTowards)
+        {
+            bl_moveTowards = false;
+            if (towerUI.activeInHierarchy) towerUI.SetActive(false);
+        }
     }
 
     void ZoomCamera()
@@ -91,12 +98,13 @@ public class JH_Camera_Controls : MonoBehaviour
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
             {
                 // Remember to check for components instead of tags, as more efficient
-                if (hit.transform.tag == "Tower")
+                if (hit.transform.GetComponent<JH_Tower_Stats>() != null)
                 {
                     go_moveTowards = hit.transform.GetChild(0).GetChild(0).gameObject;
                     if (fl_countTime <= fl_doubleClickTime && fl_countTime != 0)
                     {
                         if (go_moveTowards != null) bl_moveTowards = true;
+                        if (towerUI.activeInHierarchy) towerUI.SetActive(false);
                         bl_countTime = false;
                         fl_countTime = 0;
                     }
@@ -113,6 +121,7 @@ public class JH_Camera_Controls : MonoBehaviour
             {
                 bl_countTime = false;
                 fl_countTime = 0;
+                if (!bl_moveTowards) OpenTowerUI();
             }
         }
 
@@ -125,7 +134,11 @@ public class JH_Camera_Controls : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, go_moveTowards.transform.position, fl_zoomSpeed);
                 // Sets zoom to 20 if it was greater than 30
-                if (transform.position == go_moveTowards.transform.position && cameraZoom > 30) cameraZoom = 20;
+                if (transform.position == go_moveTowards.transform.position)
+                {
+                    if (!towerUI.activeInHierarchy) towerUI.SetActive(true);
+                    if (cameraZoom > 30) cameraZoom = 20;
+                }
             }
             else
             {
@@ -143,5 +156,11 @@ public class JH_Camera_Controls : MonoBehaviour
                 }
             }
         }
+    }
+
+    void OpenTowerUI()
+    {
+        if (towerUI.activeInHierarchy) towerUI.SetActive(false);
+        else towerUI.SetActive(true);
     }
 }
