@@ -33,6 +33,7 @@ public class JH_Camera_Controls : MonoBehaviour
     public GameObject go_moveTowards;
     private GameObject go_previouslySelected;
     private float fl_zoomSpeed;
+    private bool bl_uiHidden;
     // Start is called before the first frame update
     void Start()
     {
@@ -82,10 +83,15 @@ public class JH_Camera_Controls : MonoBehaviour
         Vector3 zoomCamera = new Vector3(transform.localPosition.x, cameraZoom, transform.localPosition.z);
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, zoomCamera, cameraZoomSpeed);
 
-        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && bl_moveTowards)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
+            if (bl_moveTowards)
+            {
             bl_moveTowards = false;
             if (towerUI.activeInHierarchy) towerUI.SetActive(false);
+            }
+
+            bl_uiHidden = false;
         }
     }
 
@@ -120,7 +126,7 @@ public class JH_Camera_Controls : MonoBehaviour
                     {
                         gameManager.selectedUnit = hit.transform.gameObject;
                     }
-                    else gameManager.selectedUnit = null;
+                    else if (hit.transform.GetComponent<JH_Tile>() == null) gameManager.selectedUnit = null;
                 }
             }
         }
@@ -133,7 +139,12 @@ public class JH_Camera_Controls : MonoBehaviour
             {
                 bl_countTime = false;
                 fl_countTime = 0;
-                if (!bl_moveTowards && (go_moveTowards == go_previouslySelected || go_previouslySelected == null)) OpenTowerUI();
+                bl_uiHidden = false;
+                if (!bl_moveTowards)
+                {
+                    if (go_moveTowards == go_previouslySelected && towerUI.activeInHierarchy) towerUI.SetActive(false);
+                    else towerUI.SetActive(true);
+                }
                 go_previouslySelected = go_moveTowards;
             }
         }
@@ -149,7 +160,7 @@ public class JH_Camera_Controls : MonoBehaviour
                 // Sets zoom to 20 if it was greater than 30
                 if (transform.position == go_moveTowards.transform.position)
                 {
-                    if (!towerUI.activeInHierarchy) towerUI.SetActive(true);
+                    if (!towerUI.activeInHierarchy && !bl_uiHidden) towerUI.SetActive(true);
                     if (cameraZoom > 30) cameraZoom = 20;
                 }
             }
@@ -175,5 +186,10 @@ public class JH_Camera_Controls : MonoBehaviour
     {
         if (towerUI.activeInHierarchy) towerUI.SetActive(false);
         else towerUI.SetActive(true);
+    }
+
+    public void CloseButton()
+    {
+        bl_uiHidden = true;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class JH_Grid : MonoBehaviour
 {
     public JH_Game_Manager.gridOwnership gridOwnership;
+    public GameObject go_grid;
     private JH_Game_Manager gameManager;
 
     public GameObject[] tileList;
@@ -14,6 +15,14 @@ public class JH_Grid : MonoBehaviour
     void Start()
     {
         gameManager = Camera.main.GetComponent<JH_Game_Manager>();
+        if (tileList.Length == 0)
+        {
+            tileList = new GameObject[go_grid.transform.childCount];
+            for (int i = 0; i < tileList.Length; i++)
+            {
+                tileList[i] = go_grid.transform.GetChild(i).gameObject;
+            }
+        }
     }
 
     // Update is called once per frame
