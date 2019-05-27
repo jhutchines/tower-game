@@ -9,6 +9,10 @@ public class JH_Tile : MonoBehaviour
     public int tileX;
     public int tileZ;
 
+    public float tileY;
+
+    public bool tileOccupied;
+
     public Color c_startColor;
     private JH_Game_Manager gameManager;
 
@@ -17,6 +21,7 @@ public class JH_Tile : MonoBehaviour
     {
         tileX = Mathf.RoundToInt(transform.position.x);
         tileZ = Mathf.RoundToInt(transform.position.z);
+        tileY = transform.position.y;
         c_startColor = GetComponent<Renderer>().material.color;
         gameManager = Camera.main.GetComponent<JH_Game_Manager>();
     }
