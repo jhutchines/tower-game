@@ -124,7 +124,10 @@ public class JH_Camera_Controls : MonoBehaviour
                 {
                     if (hit.transform.GetComponent<JH_Unit>() != null)
                     {
-                        gameManager.selectedUnit = hit.transform.gameObject;
+                        if (hit.transform.GetComponent<JH_Unit>().unitOwnership == JH_Game_Manager.unitOwnership.Player)
+                        {
+                            gameManager.selectedUnit = hit.transform.gameObject;
+                        }
                     }
                     else if (hit.transform.GetComponent<JH_Tile>() == null) gameManager.selectedUnit = null;
                 }

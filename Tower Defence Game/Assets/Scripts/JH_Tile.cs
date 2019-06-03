@@ -11,7 +11,7 @@ public class JH_Tile : MonoBehaviour
 
     public float tileY;
 
-    public bool tileOccupied;
+    public GameObject tileOccupied;
 
     public Color c_startColor;
     private JH_Game_Manager gameManager;
