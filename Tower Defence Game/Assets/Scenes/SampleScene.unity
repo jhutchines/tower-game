@@ -3763,7 +3763,7 @@ MonoBehaviour:
   parentTower: {fileID: 412146245}
   onCurrentTile: 0
   fl_moveSpeed: 0.018
-  fl_climbAmount: 1
+  fl_climbAmount: 2
   fl_range: 1
   in_movement: 99
   in_health: 0

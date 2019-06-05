@@ -261,6 +261,7 @@ public class JH_Unit : MonoBehaviour
     }
     public void ClimbingFinished()
     {
+        if (transform.position.y > v3_climbTowards.y + 0.5f) in_health--;
         transform.position = v3_climbTowards;
         animator.SetBool("isClimbing", false);
         Debug.Log("Finished Climbing");
