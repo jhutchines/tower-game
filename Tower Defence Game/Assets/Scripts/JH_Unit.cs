@@ -13,17 +13,19 @@ public class JH_Unit : MonoBehaviour
     public int in_health;
 
     private JH_Game_Manager gameManager;
-    private bool bl_moving;
-    private bool bl_climbing;
     private Vector3 v3_moveTowards;
     private Vector3 v3_climbTowards;
     public JH_Game_Manager.unitOwnership unitOwnership;
     private int in_startingMovement;
     private GameObject go_changePlaces;
+    private Vector3 v3_childPosition;
+
+    [HideInInspector] public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = transform.GetChild(0).GetComponent<Animator>();
         gameManager = Camera.main.GetComponent<JH_Game_Manager>();
         for (int i = 0; i < parentTower.GetComponent<JH_Grid>().tileList.Length; i++)
         {
@@ -36,6 +38,8 @@ public class JH_Unit : MonoBehaviour
             }
         }
         in_startingMovement = in_movement;
+
+        v3_childPosition = new Vector3(0, -0.9f, 0);
     }
 
     // Update is called once per frame
@@ -46,20 +50,24 @@ public class JH_Unit : MonoBehaviour
             CheckTiles();
             UnitSelected();
         }
-        if (bl_climbing)
-        {
-            
-            // Once anim is finished, appear at right position
-
-            transform.position = v3_climbTowards;
-            bl_climbing = false;
-            Debug.Log("Finished Climbing");
-            
-        }
-        if (bl_moving)
+        
+        if (animator.GetBool("isWalking"))
         {
             transform.position = Vector3.MoveTowards(transform.position, v3_moveTowards, fl_moveSpeed);
-            if (transform.position == v3_moveTowards) bl_moving = false;
+            if (transform.position == v3_moveTowards) animator.SetBool("isWalking", false);
+        }
+
+        if (transform.GetChild(0).transform.localPosition.x >= 1 ||
+            transform.GetChild(0).transform.localPosition.x <= -1 ||
+            transform.GetChild(0).transform.localPosition.z >= 1 ||
+            transform.GetChild(0).transform.localPosition.z <= -1)
+        {
+            transform.GetChild(0).transform.localPosition = v3_childPosition;
+        }
+
+        if (animator.GetBool("isClimbing"))
+        {
+            ClimbingFinished();
         }
     }
 
@@ -195,7 +203,7 @@ public class JH_Unit : MonoBehaviour
             {
                 if (hit.transform.GetComponent<JH_Tile>() != null)
                 {
-                    if (hit.transform.GetComponent<Renderer>().material.color == gameManager.m_canMove.color && !bl_moving)
+                    if (hit.transform.GetComponent<Renderer>().material.color == gameManager.m_canMove.color && !animator.GetBool("isWalking"))
                     {
                         if (hit.transform.GetComponent<JH_Tile>().tileOccupied != null)
                         {
@@ -218,25 +226,29 @@ public class JH_Unit : MonoBehaviour
                         in_movement--;
 
                         v3_moveTowards = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z);
-                        if (v3_moveTowards.y > transform.position.y - 0.5f)
+
+                        if (!animator.GetBool("isClimbing"))
                         {
-                            v3_climbTowards = new Vector3(v3_moveTowards.x, v3_moveTowards.y + 0.5f, v3_moveTowards.z);
-                            bl_climbing = true;
-                            Debug.Log("Climbing");
-                        }
-                        else if (v3_moveTowards.y + 0.5f < transform.position.y)
-                        {
-                            v3_climbTowards = new Vector3(v3_moveTowards.x, v3_moveTowards.y + 0.5f, v3_moveTowards.z);
-                            bl_climbing = true;
-                            Debug.Log("Climbing");
-                        }
-                        else
-                        {
-                            bl_moving = true;
-                            if (go_changePlaces != null)
+                            if (v3_moveTowards.y > transform.position.y - 0.5f)
                             {
-                                go_changePlaces.GetComponent<JH_Unit>().in_movement--;
-                                go_changePlaces.GetComponent<JH_Unit>().bl_moving = true;
+                                v3_climbTowards = new Vector3(v3_moveTowards.x, v3_moveTowards.y + 0.5f, v3_moveTowards.z);
+                                animator.SetBool("isClimbing", true);
+                                Debug.Log("Climbing");
+                            }
+                            else if (v3_moveTowards.y + 0.5f < transform.position.y)
+                            {
+                                v3_climbTowards = new Vector3(v3_moveTowards.x, v3_moveTowards.y + 0.5f, v3_moveTowards.z);
+                                animator.SetBool("isClimbing", true);
+                                Debug.Log("Climbing");
+                            }
+                            else
+                            {
+                                animator.SetBool("isWalking", true);
+                                if (go_changePlaces != null)
+                                {
+                                    go_changePlaces.GetComponent<JH_Unit>().in_movement--;
+                                    go_changePlaces.GetComponent<JH_Unit>().animator.SetBool("isWalking", true);
+                                }
                             }
                         }
 
@@ -246,6 +258,12 @@ public class JH_Unit : MonoBehaviour
                 }
             }
         }
+    }
+    public void ClimbingFinished()
+    {
+        transform.position = v3_climbTowards;
+        animator.SetBool("isClimbing", false);
+        Debug.Log("Finished Climbing");
     }
 }
  
