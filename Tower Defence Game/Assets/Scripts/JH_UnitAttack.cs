@@ -6,9 +6,9 @@ public class JH_UnitAttack : MonoBehaviour
 {
     public int in_damage;
 
-    // -- Unit Type enum
+    // Unit Type enum
     public JH_Game_Manager.unitType unitType;
-    // -- Unit to take damage
+    // Unit to take damage
     public GameObject damagedEnemy;
     // Start is called before the first frame update
     void Start()
@@ -22,16 +22,23 @@ public class JH_UnitAttack : MonoBehaviour
         
     }
 
-    // -- Attack function
+    // Attack function
 
-    void AttackExample()
+    public void AttackTarget()
     {
         if (unitType == JH_Game_Manager.unitType.Archer)
         {
             in_damage = 2;
         }
 
-        damagedEnemy.GetComponent<JH_Unit>().in_health = in_damage;
+
+        // Animation goes here
+
+        damagedEnemy.GetComponent<JH_Unit>().in_health -= in_damage;
+        if (damagedEnemy.GetComponent<JH_Unit>().in_health <= 0)
+        {
+            damagedEnemy.GetComponent<JH_Unit>().StartDeathSequence();
+        }
 
 
     }

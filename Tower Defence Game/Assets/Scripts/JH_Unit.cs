@@ -19,6 +19,8 @@ public class JH_Unit : MonoBehaviour
     private int in_startingMovement;
     private GameObject go_changePlaces;
     private Vector3 v3_childPosition;
+    private bool bl_deathSequence;
+    private Vector3 v3_deathMove;
 
     [HideInInspector] public Animator animator;
 
@@ -34,7 +36,7 @@ public class JH_Unit : MonoBehaviour
             {
                 onCurrentTile = i;
                 parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
-                return;
+                break;
             }
         }
         in_startingMovement = in_movement;
@@ -69,6 +71,8 @@ public class JH_Unit : MonoBehaviour
         {
             ClimbingFinished();
         }
+
+        if (bl_deathSequence) UnitDeath();
     }
 
     void CheckTiles()
@@ -255,16 +259,45 @@ public class JH_Unit : MonoBehaviour
                         go_changePlaces = null;
                         v3_moveTowards.y = transform.position.y;
                     }
+
+                    if (hit.transform.GetComponent<Renderer>().material.color == gameManager.m_canAttack.color)
+                    {
+                        GetComponent<JH_UnitAttack>().damagedEnemy = hit.transform.GetComponent<JH_Tile>().tileOccupied;
+                        GetComponent<JH_UnitAttack>().AttackTarget();
+                    }
                 }
             }
         }
     }
+
     public void ClimbingFinished()
     {
         if (transform.position.y > v3_climbTowards.y + 0.5f) in_health--;
         transform.position = v3_climbTowards;
         animator.SetBool("isClimbing", false);
         Debug.Log("Finished Climbing");
+    }
+
+    public void StartDeathSequence()
+    {
+        StartCoroutine(DeathSequence());
+    }
+
+    IEnumerator DeathSequence()
+    {
+        parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].GetComponent<JH_Tile>().tileOccupied = null;
+
+        // Death animation goes here
+
+        yield return new WaitForSeconds(5);
+        v3_deathMove = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
+        bl_deathSequence = true;
+    }
+
+    void UnitDeath()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, v3_deathMove, 0.05f);
+        if (transform.position == v3_deathMove) Destroy(gameObject);
     }
 }
  
