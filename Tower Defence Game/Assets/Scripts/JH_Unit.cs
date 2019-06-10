@@ -276,6 +276,12 @@ public class JH_Unit : MonoBehaviour
         transform.position = v3_climbTowards;
         animator.SetBool("isClimbing", false);
         Debug.Log("Finished Climbing");
+
+        if (in_health <= 0)
+        {
+            animator.Play("Death");
+            StartCoroutine(DeathSequence());
+        }
     }
 
     public void StartDeathSequence()
