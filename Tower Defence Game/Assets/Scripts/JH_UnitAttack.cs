@@ -34,6 +34,8 @@ public class JH_UnitAttack : MonoBehaviour
 
         // Animation goes here
 
+        GetComponent<JH_Unit>().animator.Play("ATK");
+
         damagedEnemy.GetComponent<JH_Unit>().in_health -= in_damage;
         if (damagedEnemy.GetComponent<JH_Unit>().in_health <= 0)
         {
