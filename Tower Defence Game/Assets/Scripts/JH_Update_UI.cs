@@ -19,6 +19,7 @@ public class JH_Update_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Displays the correct stats when the UI opens
         towerName.text = go_camera.GetComponent<JH_Camera_Controls>().go_moveTowards.transform.parent.parent.GetComponent<JH_Tower_Stats>().towerName;
         towerHealth.text = "Health: " + go_camera.GetComponent<JH_Camera_Controls>().go_moveTowards.transform.parent.parent.GetComponent<JH_Tower_Stats>().towerHealth;
         towerPeasants.text = "Number of peasants: " + go_camera.GetComponent<JH_Camera_Controls>().go_moveTowards.transform.parent.parent.GetComponent<JH_Tower_Stats>().towerPeasants;

@@ -55,6 +55,7 @@ public class JH_Camera_Controls : MonoBehaviour
     void CameraLocked()
     {
 
+        // Speeds up the camera controls if shift is held
         if (Input.GetKey(KeyCode.LeftShift))
         {
             cameraSpeed = startCameraSpeed * 2;
@@ -79,16 +80,18 @@ public class JH_Camera_Controls : MonoBehaviour
         clampedPosition.z = Mathf.Clamp(clampedPosition.z, -maxDistance, maxDistance);
         transform.position = clampedPosition;
 
+        // Allows the camera to be zoomed in and out using the mouse scroll wheel
         cameraZoom = Mathf.Clamp(cameraZoom += Input.GetAxis("Mouse ScrollWheel"), minZoom, maxZoom);
         Vector3 zoomCamera = new Vector3(transform.localPosition.x, cameraZoom, transform.localPosition.z);
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, zoomCamera, cameraZoomSpeed);
 
+        // Stops moving the camera towards a tower if movement keys pressed
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             if (bl_moveTowards)
             {
-            bl_moveTowards = false;
-            if (towerUI.activeInHierarchy) towerUI.SetActive(false);
+                bl_moveTowards = false;
+                if (towerUI.activeInHierarchy) towerUI.SetActive(false);
             }
 
             bl_uiHidden = false;
@@ -100,13 +103,12 @@ public class JH_Camera_Controls : MonoBehaviour
         // When click is released, zoom in on a defined object such as "tower"
         if (Input.GetMouseButtonUp(0))
         {
-
-            // Convert current camera position of mouse on screen, moves forward towards objects selected
+            
             // Starts ray at mouse position to check what the player has clicked on
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
             {
-                // Remember to check for components instead of tags, as more efficient
+                // Checks if the object hit has the component that only towers have
                 if (hit.transform.GetComponent<JH_Tower_Stats>() != null)
                 {
                     go_moveTowards = hit.transform.GetChild(0).GetChild(0).gameObject;
@@ -120,6 +122,7 @@ public class JH_Camera_Controls : MonoBehaviour
                     bl_countTime = true;
                 }
 
+                // Checks if the object hit has the component that only units have, and battle has started
                 if (gameManager.inBattle)
                 {
                     if (hit.transform.GetComponent<JH_Unit>() != null)
@@ -134,7 +137,7 @@ public class JH_Camera_Controls : MonoBehaviour
             }
         }
 
-        // Counts time between clicks
+        // Counts time between clicks to check for double clicks
         if (bl_countTime)
         {
             fl_countTime += Time.deltaTime;
@@ -167,6 +170,8 @@ public class JH_Camera_Controls : MonoBehaviour
                     if (cameraZoom > 30) cameraZoom = 20;
                 }
             }
+
+            // Sets the movement speed towards the tower depending on how far away it is
             else
             {
                 if (Vector3.Distance(transform.position, go_moveTowards.transform.position) > 40)
@@ -185,12 +190,15 @@ public class JH_Camera_Controls : MonoBehaviour
         }
     }
 
+
+    // Opens or closes the UI for a tower
     void OpenTowerUI()
     {
         if (towerUI.activeInHierarchy) towerUI.SetActive(false);
         else towerUI.SetActive(true);
     }
 
+    // Closes the UI for a tower if it is open
     public void CloseButton()
     {
         bl_uiHidden = true;

@@ -40,6 +40,7 @@ public class JH_Tile : MonoBehaviour
 
     }
 
+    // Changes colour of the tile depending on if the unit can move there
     private void OnMouseEnter()
     {
         if (gameManager.selectedUnit != null)
@@ -55,6 +56,7 @@ public class JH_Tile : MonoBehaviour
         }
     }
 
+    // Returns tile colour to the correct colour when the mouse is no longer over it
     private void OnMouseExit()
     {
         if (GetComponent<Renderer>().material.color != gameManager.m_canMove.color)
