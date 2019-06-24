@@ -12,6 +12,7 @@ public class JH_Tile : MonoBehaviour
     public float tileY;
 
     public GameObject tileOccupied;
+    public GameObject towerGrid;
 
     public Color c_startColor;
     private JH_Game_Manager gameManager;
@@ -29,7 +30,7 @@ public class JH_Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.selectedUnit == null)
+        if (gameManager.selectedUnit == null && !towerGrid.GetComponent<JH_Grid>().spawningUnit)
         {
             GetComponent<Renderer>().material.color = c_startColor;
         }
@@ -64,5 +65,14 @@ public class JH_Tile : MonoBehaviour
             GetComponent<Renderer>().material.color = c_startColor;
         }
         else GetComponent<Renderer>().material.color = gameManager.m_checkMove.color;
+    }
+
+    public void Spawning()
+    {
+        if (towerGrid.GetComponent<JH_Grid>().spawningUnit)
+        {
+            GetComponent<Renderer>().material.color = gameManager.m_canSpawn.color;
+        }
+        else GetComponent<Renderer>().material.color = c_startColor;
     }
 }
