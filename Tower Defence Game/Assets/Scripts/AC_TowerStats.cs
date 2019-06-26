@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AC_TowerStats : MonoBehaviour
 {
@@ -20,7 +21,13 @@ public class AC_TowerStats : MonoBehaviour
     public int newUnits;
     public int peasantNum;
     public int soldierNum;
+    public int currentUnit;
+    public bool isTraining;
+    public GameObject trainingInput;
     public int trainingNum;
+    public int currentTrainingUnit;
+    public int trainingTurns;
+    public int currentTrainingTurnsLeft;
     public GameObject setUnit;
     public GameObject peasantUnit;
     public GameObject soldierUnit;
@@ -68,7 +75,6 @@ public class AC_TowerStats : MonoBehaviour
             SpawnUnit();
             }
         }
-
     }
 
     public void TowerDeath()
@@ -172,9 +178,10 @@ public class AC_TowerStats : MonoBehaviour
     public void SetPeasant()
     {
         if (peasantNum > 0)
-        {
+        {          
             Debug.Log("Peasant Spawning");
             setUnit = peasantUnit;
+            currentUnit = 1;
             SettablePositions();
         }
     }
@@ -185,9 +192,125 @@ public class AC_TowerStats : MonoBehaviour
         {
             Debug.Log("Soldier Spawning");
             setUnit = soldierUnit;
+            currentUnit = 2;
             SettablePositions();
         }
     }
+
+    public void TrainOne()
+    {
+        if (peasantNum > 0 && !isTraining)
+        {
+            Debug.Log("Training One Unit");
+            // Change for number selected.
+            trainingNum = 1;
+            TrainPeasant();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void TrainTwo()
+    {
+        if (peasantNum > 1 && !isTraining)
+        {
+            Debug.Log("Training Two Unit");
+            // Change for number selected.
+            trainingNum = 2;
+            TrainPeasant();
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void TrainThree()
+    {
+        if (peasantNum > 2 && !isTraining)
+        {
+            // Change for number selected.
+            trainingNum = 3;
+            TrainPeasant();
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void TrainFour()
+    {
+        if (peasantNum > 3 && !isTraining)
+        {
+            // Change for number selected.
+            trainingNum = 4;
+            TrainPeasant();
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void TrainFive()
+    {
+        if (peasantNum > 4 && !isTraining)
+        {
+            // Change for number selected.
+            trainingNum = 5;
+            TrainPeasant();
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void TrainSix()
+    {
+        if (peasantNum > 5 && !isTraining)
+        {
+            // Change for number selected.
+            trainingNum = 6;
+            TrainPeasant();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void TrainPeasant()
+    {
+        Debug.Log("Training Peasants");
+        currentTrainingTurnsLeft = trainingTurns;
+        currentTrainingUnit = trainingNum;
+        // Reduce peasant number.
+        isTraining = true;
+    }
+
+    public void Training()
+    {       
+        if (currentTrainingTurnsLeft == 1)
+        {
+            Debug.Log("Trained");
+            if (currentTrainingUnit == 1)
+            {
+                soldierNum += trainingNum;
+                peasantNum -= trainingNum;
+                isTraining = false;
+            }
+            else if (currentTrainingUnit == 2)
+            {
+                isTraining = false;
+            }
+        }
+        else
+        {
+            Debug.Log("Training");
+            currentTrainingTurnsLeft -= 1;
+        }
+    }
+
     public void SettablePositions()
     {
         Debug.Log("Highlighting Tiles");
@@ -214,6 +337,14 @@ public class AC_TowerStats : MonoBehaviour
         newUnit.GetComponent<JH_Unit>().parentTower = gameObject;
 
         // Reduce the number of units in tower.
+        if (currentUnit == 1)
+        {
+            peasantNum -= 1;
+        }
+        else if (currentUnit == 2)
+        {
+            soldierNum -= 1;
+        }
     }
 
 }
