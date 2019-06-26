@@ -43,6 +43,7 @@ public class JH_Game_Manager : MonoBehaviour
     public Material m_cannotMove;
     public Material m_checkMove;
     public Material m_canAttack;
+    public Material m_canSpawn;
 
     // Start is called before the first frame update
     void Start()

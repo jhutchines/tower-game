@@ -163,6 +163,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &28063019
 BoxCollider:
@@ -578,6 +579,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &157299571
 BoxCollider:
@@ -637,6 +639,124 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157299568}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &161818787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 161818788}
+  - component: {fileID: 161818791}
+  - component: {fileID: 161818790}
+  - component: {fileID: 161818789}
+  m_Layer: 5
+  m_Name: TrainPeasants
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &161818788
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161818787}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
+  m_Children:
+  - {fileID: 1081743377}
+  m_Father: {fileID: 268533951}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -30}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &161818789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161818787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 161818790}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &161818790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161818787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &161818791
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161818787}
+  m_CullTransparentMesh: 0
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +917,146 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &218321054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 218321055}
+  - component: {fileID: 218321058}
+  - component: {fileID: 218321057}
+  - component: {fileID: 218321056}
+  m_Layer: 5
+  m_Name: SetPeasants
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &218321055
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218321054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 487703602}
+  m_Father: {fileID: 268533951}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 8}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &218321056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218321054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 218321057}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 412146252}
+        m_MethodName: SetPeasant
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 268533950}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &218321057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218321054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &218321058
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218321054}
+  m_CullTransparentMesh: 0
 --- !u!1 &231187716
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +1170,9 @@ RectTransform:
   - {fileID: 1219130509}
   - {fileID: 231187717}
   - {fileID: 1749658091}
+  - {fileID: 218321055}
+  - {fileID: 161818788}
+  - {fileID: 1808314822}
   m_Father: {fileID: 1923489116}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1113,6 +1376,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &343320595
 BoxCollider:
@@ -1281,6 +1545,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &376818350
 GameObject:
@@ -1593,30 +1858,25 @@ MonoBehaviour:
   towerUnits: []
   spawnUnit: {fileID: 5015903243012007273, guid: 830f2ec06342f5141b40769022034127,
     type: 3}
-  storedUnits:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  spawnNumber: 2
+  storedUnit: []
   currentTurn: 0
   currentNum: 0
+  storedUnits: 0
+  newUnits: 0
+  peasantNum: 0
+  soldierNum: 0
+  trainingNum: 0
+  setUnit: {fileID: 0}
+  peasantUnit: {fileID: 0}
+  soldierUnit: {fileID: 0}
+  settingTiles: []
+  chosenTile: {fileID: 0}
+  unitSetting: 0
+  setPosition: {x: 0, y: 0, z: 0}
+  mainCamera: {fileID: 0}
+  spawnPositionLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &412146245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,6 +2002,7 @@ MonoBehaviour:
   gridOwnership: 1
   go_grid: {fileID: 2113891812}
   tileList: []
+  spawningUnit: 0
 --- !u!114 &412146252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,30 +2022,33 @@ MonoBehaviour:
   towerUnits: []
   spawnUnit: {fileID: 5015903243012007273, guid: 830f2ec06342f5141b40769022034127,
     type: 3}
-  storedUnits:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  spawnNumber: 2
+  storedUnit: []
   currentTurn: 0
   currentNum: 0
+  storedUnits: 0
+  newUnits: 2
+  peasantNum: 0
+  soldierNum: 0
+  trainingNum: 0
+  setUnit: {fileID: 0}
+  peasantUnit: {fileID: 5015903243012007273, guid: 830f2ec06342f5141b40769022034127,
+    type: 3}
+  soldierUnit: {fileID: 5015903243012007273, guid: 69d9cb13a2df4ca469c915a79bd72508,
+    type: 3}
+  settingTiles:
+  - {fileID: 2139609185}
+  - {fileID: 1346561632}
+  - {fileID: 1508866472}
+  - {fileID: 565623283}
+  - {fileID: 1567927746}
+  - {fileID: 777354426}
+  chosenTile: {fileID: 0}
+  unitSetting: 0
+  setPosition: {x: 0, y: 0, z: 0}
+  mainCamera: {fileID: 534669904}
+  spawnPositionLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &434363566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,6 +2282,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &480749571
 BoxCollider:
@@ -2077,6 +2342,85 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480749568}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &487703601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 487703602}
+  - component: {fileID: 487703604}
+  - component: {fileID: 487703603}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &487703602
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487703601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 218321055}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &487703603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487703601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Set Peasants
+--- !u!222 &487703604
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487703601}
+  m_CullTransparentMesh: 0
 --- !u!4 &490123783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400090, guid: a01111addac589d47826dfcfde2fde92,
@@ -2134,6 +2478,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &515969150
 BoxCollider:
@@ -2410,6 +2755,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &519984286
 GameObject:
@@ -2462,6 +2808,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &519984289
 BoxCollider:
@@ -2623,6 +2970,7 @@ MonoBehaviour:
   m_cannotMove: {fileID: 2100000, guid: 0b1f3f9c0bcf48b46afc8ce8cb6cd3ae, type: 2}
   m_checkMove: {fileID: 2100000, guid: bf97975a88ab6df4ba3c62a59b289143, type: 2}
   m_canAttack: {fileID: 2100000, guid: 24dcae698e3565e4c834813cbab8d533, type: 2}
+  m_canSpawn: {fileID: 2100000, guid: cbe2743c4be71a748b27c26a0599e909, type: 2}
 --- !u!1 &565623283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,7 +2984,7 @@ GameObject:
   - component: {fileID: 565623287}
   - component: {fileID: 565623286}
   - component: {fileID: 565623285}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2674,6 +3022,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &565623286
 BoxCollider:
@@ -2968,6 +3317,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &597674989
 BoxCollider:
@@ -3244,6 +3594,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &695227980
 BoxCollider:
@@ -3536,6 +3887,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &700411287
 BoxCollider:
@@ -3646,6 +3998,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &703363216
 BoxCollider:
@@ -3973,6 +4326,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &757657920
 BoxCollider:
@@ -4233,6 +4587,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &767897920
 GameObject:
@@ -4285,6 +4640,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &767897923
 BoxCollider:
@@ -4579,7 +4935,7 @@ GameObject:
   - component: {fileID: 777354430}
   - component: {fileID: 777354429}
   - component: {fileID: 777354428}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (40)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4617,6 +4973,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &777354429
 BoxCollider:
@@ -4864,6 +5221,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &814557888
 GameObject:
@@ -4916,6 +5274,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &814557891
 BoxCollider:
@@ -5026,6 +5385,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &818144213
 BoxCollider:
@@ -5136,6 +5496,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &830501117
 BoxCollider:
@@ -5246,6 +5607,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &887167147
 BoxCollider:
@@ -5774,6 +6136,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1075836675
 BoxCollider:
@@ -5833,6 +6196,85 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075836672}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1081743376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1081743377}
+  - component: {fileID: 1081743379}
+  - component: {fileID: 1081743378}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1081743377
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081743376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 161818788}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1081743378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081743376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Train Peasant
+--- !u!222 &1081743379
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081743376}
+  m_CullTransparentMesh: 0
 --- !u!1 &1096374153
 GameObject:
   m_ObjectHideFlags: 0
@@ -5884,6 +6326,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1096374156
 BoxCollider:
@@ -6335,6 +6778,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1317563804
 BoxCollider:
@@ -6445,6 +6889,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1335224022
 BoxCollider:
@@ -6555,6 +7000,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1339194513
 BoxCollider:
@@ -6627,7 +7073,7 @@ GameObject:
   - component: {fileID: 1346561634}
   - component: {fileID: 1346561633}
   - component: {fileID: 1346561637}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6723,6 +7169,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1366040110
 GameObject:
@@ -6946,6 +7393,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1405758118
 GameObject:
@@ -7089,6 +7537,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1421076147
 BoxCollider:
@@ -7199,6 +7648,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1422803607
 BoxCollider:
@@ -7309,6 +7759,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1431070685
 BoxCollider:
@@ -7554,6 +8005,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1472372696
 BoxCollider:
@@ -7664,6 +8116,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1490212942
 BoxCollider:
@@ -7840,6 +8293,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1507911379
 BoxCollider:
@@ -7912,7 +8366,7 @@ GameObject:
   - component: {fileID: 1508866474}
   - component: {fileID: 1508866473}
   - component: {fileID: 1508866477}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8008,6 +8462,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1567927746
 GameObject:
@@ -8022,7 +8477,7 @@ GameObject:
   - component: {fileID: 1567927750}
   - component: {fileID: 1567927749}
   - component: {fileID: 1567927748}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (37)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8060,6 +8515,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1567927749
 BoxCollider:
@@ -8149,6 +8605,85 @@ Transform:
   m_Father: {fileID: 1444940544}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1620520038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1620520039}
+  - component: {fileID: 1620520041}
+  - component: {fileID: 1620520040}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1620520039
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620520038}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1808314822}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1620520040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620520038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Set Soldiers
+--- !u!222 &1620520041
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620520038}
+  m_CullTransparentMesh: 0
 --- !u!1 &1711862909
 GameObject:
   m_ObjectHideFlags: 0
@@ -8291,6 +8826,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1718362943
 BoxCollider:
@@ -8541,6 +9077,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1752550928
 BoxCollider:
@@ -8767,6 +9304,124 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1808314821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1808314822}
+  - component: {fileID: 1808314825}
+  - component: {fileID: 1808314824}
+  - component: {fileID: 1808314823}
+  m_Layer: 5
+  m_Name: SetSoldiers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1808314822
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808314821}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
+  m_Children:
+  - {fileID: 1620520039}
+  m_Father: {fileID: 268533951}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -68}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1808314823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808314821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1808314824}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1808314824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808314821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &1808314825
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808314821}
+  m_CullTransparentMesh: 0
 --- !u!1 &1812799096
 GameObject:
   m_ObjectHideFlags: 0
@@ -8862,6 +9517,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1873171072
 BoxCollider:
@@ -8972,6 +9628,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1877461563
 BoxCollider:
@@ -9161,6 +9818,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1883749048
 BoxCollider:
@@ -9271,6 +9929,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1903984815
 BoxCollider:
@@ -9539,6 +10198,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1979619752
 GameObject:
@@ -9591,6 +10251,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1979619755
 BoxCollider:
@@ -9701,6 +10362,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1995531369
 BoxCollider:
@@ -9811,6 +10473,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &2005570088
 BoxCollider:
@@ -10100,7 +10763,7 @@ GameObject:
   - component: {fileID: 2139609187}
   - component: {fileID: 2139609186}
   - component: {fileID: 2139609190}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10196,6 +10859,7 @@ MonoBehaviour:
   tileZ: 0
   tileY: 0
   tileOccupied: {fileID: 0}
+  towerGrid: {fileID: 0}
   c_startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &5015903243649852677
 PrefabInstance:
