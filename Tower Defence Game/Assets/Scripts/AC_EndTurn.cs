@@ -9,11 +9,12 @@ public class AC_EndTurn : MonoBehaviour
     public GameObject[] go_Towers;
     public Button endTurnButton;
     public int turnCounter;
+    private AC_UnitZoneSetting unitZoneSetting;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        unitZoneSetting = GameObject.Find("UnitZones").GetComponent<AC_UnitZoneSetting>();
     }
 
     // Update is called once per frame
@@ -27,6 +28,13 @@ public class AC_EndTurn : MonoBehaviour
         if (turnCounter == 0)
         {
             turnCounter = 1;
+
+            if (unitZoneSetting.firstTurn == true)
+            {
+                towerStats = GameObject.Find("White Tower").GetComponent<AC_TowerStats>();
+                unitZoneSetting.firstTurn = false;
+                towerStats.FirstTurnTiles();
+            }
         }
         else
         {

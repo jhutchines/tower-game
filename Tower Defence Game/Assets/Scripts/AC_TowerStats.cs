@@ -33,7 +33,10 @@ public class AC_TowerStats : MonoBehaviour
     public GameObject soldierUnit;
 
     //Spawn Locations.
+    private AC_UnitZoneSetting unitZoneSetting;
+    private JH_Tile tiles;
     public GameObject[] settingTiles;
+    public GameObject[] firstTurnTiles;
     public GameObject chosenTile;
     public bool unitSetting;
     public Vector3 setPosition;
@@ -47,6 +50,7 @@ public class AC_TowerStats : MonoBehaviour
     void Start()
     {
         endTurn = GameObject.Find("Button").GetComponent<AC_EndTurn>();
+        unitZoneSetting = GameObject.Find("UnitZones").GetComponent<AC_UnitZoneSetting>();
         currentNum = newUnits;
     }
 
@@ -177,23 +181,29 @@ public class AC_TowerStats : MonoBehaviour
 
     public void SetPeasant()
     {
-        if (peasantNum > 0)
-        {          
-            Debug.Log("Peasant Spawning");
-            setUnit = peasantUnit;
-            currentUnit = 1;
-            SettablePositions();
+        if (currentTurn == 0)
+        {
+            if (peasantNum > 0)
+            {
+                Debug.Log("Peasant Spawning");
+                setUnit = peasantUnit;
+                currentUnit = 1;
+                SettablePositions();
+            }
         }
     }
 
     public void SetSoldier()
     {
-        if (soldierNum > 0)
+        if (currentTurn == 0)
         {
-            Debug.Log("Soldier Spawning");
-            setUnit = soldierUnit;
-            currentUnit = 2;
-            SettablePositions();
+            if (soldierNum > 0)
+            {
+                Debug.Log("Soldier Spawning");
+                setUnit = soldierUnit;
+                currentUnit = 2;
+                SettablePositions();
+            }
         }
     }
 
@@ -281,11 +291,14 @@ public class AC_TowerStats : MonoBehaviour
 
     public void TrainPeasant()
     {
-        Debug.Log("Training Peasants");
-        currentTrainingTurnsLeft = trainingTurns;
-        currentTrainingUnit = trainingNum;
-        // Reduce peasant number.
-        isTraining = true;
+        if (currentTurn == 0)
+        {
+            Debug.Log("Training Peasants");
+            currentTrainingTurnsLeft = trainingTurns;
+            currentTrainingUnit = trainingNum;
+            // Reduce peasant number.
+            isTraining = true;
+        }
     }
 
     public void Training()
@@ -311,21 +324,53 @@ public class AC_TowerStats : MonoBehaviour
         }
     }
 
+    public void FirstTurnTiles()
+    {
+        Debug.Log("Turning off tiles");
+
+        for (int i = 0; i < firstTurnTiles.Length; i++)
+        {
+            if (firstTurnTiles[i].GetComponent<JH_Tile>().initialBattleMove)
+            {
+                firstTurnTiles[i].layer = 0;
+            }
+        }
+    }
+
     public void SettablePositions()
     {
-        Debug.Log("Highlighting Tiles");
-
-        gameObject.GetComponent<JH_Grid>().spawningUnit = true;
-
-        // Turns the availble tiles green.
-        for (int i = 0; i < settingTiles.Length; i++)
+        if (unitZoneSetting.firstTurn)
         {
-            Debug.Log("Tile Turning");
-            settingTiles[i].GetComponent<JH_Tile>().Spawning();
-        }
+            Debug.Log("Highlighting Tiles");
 
-        //
-        unitSetting = true;
+            gameObject.GetComponent<JH_Grid>().spawningUnit = true;
+
+            // Turns the availble tiles green.
+            for (int i = 0; i < firstTurnTiles.Length; i++)
+            {
+                Debug.Log("Tile Turning");
+                firstTurnTiles[i].GetComponent<JH_Tile>().Spawning();
+            }
+
+            //
+            unitSetting = true;
+        }
+        else
+        {
+            Debug.Log("Highlighting Tiles");
+
+            gameObject.GetComponent<JH_Grid>().spawningUnit = true;
+
+            // Turns the availble tiles green.
+            for (int i = 0; i < settingTiles.Length; i++)
+            {
+                Debug.Log("Tile Turning");
+                settingTiles[i].GetComponent<JH_Tile>().Spawning();
+            }
+
+            //
+            unitSetting = true;
+        }
     }
 
     public void SpawnUnit()
