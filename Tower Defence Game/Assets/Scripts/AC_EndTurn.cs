@@ -31,7 +31,7 @@ public class AC_EndTurn : MonoBehaviour
 
             if (unitZoneSetting.firstTurn == true)
             {
-                towerStats = GameObject.Find("White Tower").GetComponent<AC_TowerStats>();
+                towerStats = GameObject.Find("Tower").GetComponent<AC_TowerStats>();
                 unitZoneSetting.firstTurn = false;
                 towerStats.FirstTurnTiles();
             }
