@@ -15,6 +15,7 @@ public class AC_TowerStats : MonoBehaviour
     public GameObject[] storedUnit;
     public int currentTurn;
     public int currentNum;
+    public GameObject opposingTower;
 
     // Unit Setting and Training.
     public int storedUnits;
@@ -33,7 +34,7 @@ public class AC_TowerStats : MonoBehaviour
     public GameObject soldierUnit;
 
     //Spawn Locations.
-    private AC_UnitZoneSetting unitZoneSetting;
+    //private AC_UnitZoneSetting unitZoneSetting;
     private JH_Tile tiles;
     public GameObject[] settingTiles;
     public GameObject[] firstTurnTiles;
@@ -50,8 +51,18 @@ public class AC_TowerStats : MonoBehaviour
     void Start()
     {
         endTurn = GameObject.Find("Button").GetComponent<AC_EndTurn>();
-        unitZoneSetting = GameObject.Find("UnitZones").GetComponent<AC_UnitZoneSetting>();
+        //unitZoneSetting = GameObject.Find("UnitZones").GetComponent<AC_UnitZoneSetting>();
         currentNum = newUnits;
+
+        //if (firstTurnTiles.Length == 0)
+        //{
+        //    firstTurnTiles = new GameObject[go_grid.transform.childCount];
+        //    for (int i = 0; i < firstTurnTiles.Length; i++)
+        //    {
+        //        firstTurnTiles[i] = go_grid.transform.GetChild(i).gameObject;
+        //        firstTurnTiles[i].GetComponent<JH_Tile>().towerGrid = gameObject;
+        //    }
+        //}
     }
 
     // Update is called once per frame
@@ -209,113 +220,121 @@ public class AC_TowerStats : MonoBehaviour
 
     public void TrainOne()
     {
-        if (peasantNum > 0 && !isTraining)
+
+        if (currentTurn == 0)
         {
-            Debug.Log("Training One Unit");
-            // Change for number selected.
-            trainingNum = 1;
-            TrainPeasant();
-        }
-        else
-        {
-            return;
+            if (peasantNum > 0 && !isTraining)
+            {
+                Debug.Log("Training One Unit");
+                // Change for number selected.
+                trainingNum = 1;
+                TrainPeasant();
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
     public void TrainTwo()
     {
-        if (peasantNum > 1 && !isTraining)
+        if (currentTurn == 0)
         {
-            Debug.Log("Training Two Unit");
-            // Change for number selected.
-            trainingNum = 2;
-            TrainPeasant();
-        }
-        else
-        {
-            return;
+            if (peasantNum > 1 && !isTraining)
+            {
+                Debug.Log("Training Two Unit");
+                // Change for number selected.
+                trainingNum = 2;
+                TrainPeasant();
+            }
+            else
+            {
+                return;
+            }
         }
     }
     public void TrainThree()
     {
-        if (peasantNum > 2 && !isTraining)
+        if (currentTurn == 0)
         {
-            // Change for number selected.
-            trainingNum = 3;
-            TrainPeasant();
-        }
-        else
-        {
-            return;
+            if (peasantNum > 2 && !isTraining)
+            {
+                // Change for number selected.
+                trainingNum = 3;
+                TrainPeasant();
+            }
+            else
+            {
+                return;
+            }
         }
     }
     public void TrainFour()
     {
-        if (peasantNum > 3 && !isTraining)
+        if (currentTurn == 0)
         {
-            // Change for number selected.
-            trainingNum = 4;
-            TrainPeasant();
-        }
-        else
-        {
-            return;
+            if (peasantNum > 3 && !isTraining)
+            {
+                // Change for number selected.
+                trainingNum = 4;
+                TrainPeasant();
+            }
+            else
+            {
+                return;
+            }
         }
     }
     public void TrainFive()
     {
-        if (peasantNum > 4 && !isTraining)
+        if (currentTurn == 0)
         {
-            // Change for number selected.
-            trainingNum = 5;
-            TrainPeasant();
-        }
-        else
-        {
-            return;
+            if (peasantNum > 4 && !isTraining)
+            {
+                // Change for number selected.
+                trainingNum = 5;
+                TrainPeasant();
+            }
+            else
+            {
+                return;
+            }
         }
     }
     public void TrainSix()
     {
-        if (peasantNum > 5 && !isTraining)
+        if (currentTurn == 0)
         {
-            // Change for number selected.
-            trainingNum = 6;
-            TrainPeasant();
-        }
-        else
-        {
-            return;
+            if (peasantNum > 5 && !isTraining)
+            {
+                // Change for number selected.
+                trainingNum = 6;
+                TrainPeasant();
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
     public void TrainPeasant()
     {
-        if (currentTurn == 0)
-        {
-            Debug.Log("Training Peasants");
-            currentTrainingTurnsLeft = trainingTurns;
-            currentTrainingUnit = trainingNum;
-            // Reduce peasant number.
-            isTraining = true;
-        }
+        Debug.Log("Training Peasants");
+        // Reduce peasant number.
+        peasantNum -= trainingNum;
+        currentTrainingTurnsLeft = trainingTurns;
+        isTraining = true;
     }
 
     public void Training()
     {       
         if (currentTrainingTurnsLeft == 1)
         {
-            Debug.Log("Trained");
-            if (currentTrainingUnit == 1)
-            {
-                soldierNum += trainingNum;
-                peasantNum -= trainingNum;
-                isTraining = false;
-            }
-            else if (currentTrainingUnit == 2)
-            {
-                isTraining = false;
-            }
+            Debug.Log("Trained");            
+            soldierNum += trainingNum;
+            isTraining = false;          
         }
         else
         {
@@ -339,7 +358,7 @@ public class AC_TowerStats : MonoBehaviour
 
     public void SettablePositions()
     {
-        if (unitZoneSetting.firstTurn)
+        if (endTurn.firstTurn)
         {
             Debug.Log("Highlighting Tiles");
 
