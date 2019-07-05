@@ -2580,6 +2580,7 @@ MonoBehaviour:
   peasantUnit: {fileID: 0}
   soldierUnit: {fileID: 0}
   settingTiles: []
+  firstTurnTiles: []
   chosenTile: {fileID: 0}
   unitSetting: 0
   setPosition: {x: 0, y: 0, z: 0}
@@ -2737,7 +2738,7 @@ MonoBehaviour:
   currentNum: 0
   storedUnits: 0
   newUnits: 2
-  peasantNum: 0
+  peasantNum: 20
   soldierNum: 0
   currentUnit: 0
   isTraining: 0
@@ -2758,6 +2759,7 @@ MonoBehaviour:
   - {fileID: 565623283}
   - {fileID: 1567927746}
   - {fileID: 777354426}
+  firstTurnTiles: []
   chosenTile: {fileID: 0}
   unitSetting: 0
   setPosition: {x: 0, y: 0, z: 0}
