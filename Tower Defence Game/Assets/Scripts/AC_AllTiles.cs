@@ -7,6 +7,8 @@ public class AC_AllTiles : MonoBehaviour
     public GameObject[] allTileZones;
     public GameObject[] allTilesList;
     public List<GameObject> currentZoneTiles;
+    public GameObject allTiles;
+    public int currentTile;
     public int tiles;
 
     // Start is called before the first frame update
@@ -21,56 +23,45 @@ public class AC_AllTiles : MonoBehaviour
             }
         }
 
-        if (allTilesList.Length == 0)
-        {
-            for (int i = 0; i < allTileZones.Length; i++)
-            {
-                tiles += allTileZones[i].transform.childCount;
-            }
+        //if (allTilesList.Length == 0)
+        //{
+        //    for (int i = 0; i < allTileZones.Length; i++)
+        //    {
+        //        tiles += allTileZones[i].transform.childCount;
+        //    }
 
-            allTilesList = new GameObject[tiles];
+        //    allTilesList = new GameObject[tiles];
 
-            //for (int i = 0; i < allTileZones.Length; i++)
-            //{
-            //    for (int j = 0; j < allTileZones[i].transform.childCount; j++)
-            //    {
-            //        currentZoneTiles.Add(new GameObject[allTileZones[j].transform.childCount]);
-            //    }
-            //    currentZoneTiles.Add(allTileZones[i].transform.childCount);
-            //    for (int j = 0; j < currentZoneTiles.Length; j++)
-            //    {
-            //        currentZoneTiles[j] = allTileZones[j].transform.GetChild(j).gameObject;
-            //        currentZoneTiles[j].GetComponent<JH_Tile>().towerGrid = gameObject;
-            //    }
+        //    for (int i = 0; i < allTileZones.Length; i++)
+        //    {
+        //        currentTile = 0;
 
-            //    for (int j = 0; j < currentZoneTiles.Length; j++)
-            //    {
-            //        if (allTilesList[j] != null)
-            //        {
+        //        if (allTiles.transform.GetChild(i).gameObject.transform.GetChild(currentTile).gameObject != null)
+        //        {
+        //            currentZoneTiles.Add(allTiles.transform.GetChild(i).gameObject.transform.GetChild(currentTile).gameObject);
+        //            currentTile += 1;
+        //        }
 
-            //        }
-            //    }
+        //        //allTilesList[j].GetComponent<JH_Tile>().towerGrid = gameObject;
 
-            //    currentZoneTiles.
-            //}
+        //        for (int j = 0; j < currentZoneTiles.Capacity; j++)
+        //        {
+        //            for (int k = 0; k < allTilesList.Length; k++)
+        //            {
+        //                if (allTilesList[k] == null)
+        //                {
+        //                    allTilesList[k] = currentZoneTiles[j];
+        //                }
+        //                else
+        //                {
+        //                    k += 1;
+        //                }
+        //            }
+        //        }
 
-            //for (int i = 0; i < allTilesList.Length; i++)
-            //{
-            //    if (allTilesList[i] != null)
-            //    {
-            //        for (int j = 0; j < allTileZones[i].transform.childCount; j++)
-            //        {
-            //            currentZoneTiles = new GameObject[allTileZones[k].transform.childCount];
-            //            for (int l = 0; l < currentZoneTiles.Length; l++)
-            //            {
-            //                currentZoneTiles[l] = allTileZones[l].transform.GetChild(l).gameObject;
-            //                currentZoneTiles[l].GetComponent<JH_Tile>().towerGrid = gameObject;
-            //            }
-            //        }
-            //        allTilesList[i] = allTileZones[j];
-            //    }
-            //}
-        }
+        //        currentZoneTiles.Clear();               
+        //    }
+        //}
     }
 
     // Update is called once per frame

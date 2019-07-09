@@ -1500,6 +1500,8 @@ MonoBehaviour:
   allTileZones: []
   allTilesList: []
   currentZoneTiles: []
+  allTiles: {fileID: 257027618}
+  currentTile: 0
   tiles: 0
 --- !u!4 &257027620
 Transform:
