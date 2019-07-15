@@ -1497,12 +1497,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb21b01f2e1e71a489a33b574167a0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allTileZones: []
-  allTilesList: []
-  currentZoneTiles: []
   allTiles: {fileID: 257027618}
-  currentTile: 0
+  allTileZones: []
   tiles: 0
+  allTilesList: []
+  currentZone: 0
+  currentZoneTiles: []
+  currentTile: 0
+  currentNum: 0
 --- !u!4 &257027620
 Transform:
   m_ObjectHideFlags: 0
