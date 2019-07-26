@@ -475,6 +475,8 @@ public class AC_TowerStats : MonoBehaviour
         // Instantiate chosen unit at location.
         GameObject newUnit = Instantiate(setUnit, new Vector3(setPosition.x, setPosition.y + 0.5f, setPosition.z), Quaternion.identity);
         newUnit.GetComponent<JH_Unit>().parentTower = gameObject;
+        newUnit.GetComponent<JH_Unit>().occupiedTile = chosenTile;
+        newUnit.GetComponent<JH_Unit>().ParentTowerUpdate();
 
         // Reduce the number of units in tower.
         if (currentUnit == 1)

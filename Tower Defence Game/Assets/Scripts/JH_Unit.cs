@@ -6,6 +6,10 @@ public class JH_Unit : MonoBehaviour
 {
     private AC_AllTiles allTiles;
     public GameObject[] towerUnits;
+    public GameObject occupiedTile;
+    public GameObject occupiedGrid;
+    public GameObject occupiedTower;
+    public GameObject currentTower;
 
     public GameObject parentTower;
     public int onCurrentTile;
@@ -98,6 +102,9 @@ public class JH_Unit : MonoBehaviour
                 onCurrentTile = i;
                 allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
 
+                occupiedTile = allTiles.allTilesList[i];
+                // Checks to see what tiles parent is and add the unit to the towers unit array.
+                ParentTowerUpdate();
             }               
 
             // Checks surrounding tiles
@@ -155,6 +162,8 @@ public class JH_Unit : MonoBehaviour
                                 allTiles.allTilesList[i].GetComponent<Renderer>().material.color = gameManager.m_checkMove.color;
                             }
                         }
+                        Debug.Log("Tile " + allTiles.allTilesList[i].gameObject + " occupied by " 
+                                  + allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied);
                     }
                     else
                     {
@@ -220,33 +229,93 @@ public class JH_Unit : MonoBehaviour
                 }
             }
         }
-
-        // Checks to see what tiles parent is and add the unit to the towers unit array.
-        ParentTowerUpdate();
     }
 
-    void ParentTowerUpdate()
-    {       
-        towerUnits = parentTower.GetComponent<AC_TowerStats>().towerUnits;
+    public void ParentTowerUpdate()
+    {
+        Debug.Log("Updating " + gameObject + "'s Parent.");
 
-        // Sees if the unit is already in the tower array.
-        for (int i = 0; i < towerUnits.Length; i++)
-        {
-            if (towerUnits[i] == gameObject)
+        occupiedGrid = occupiedTile.GetComponent<JH_Tile>().towerGrid.GetComponent<JH_Grid>().go_grid;
+
+        if (occupiedTower != null)
+        {          
+            occupiedTower = occupiedTile.GetComponent<JH_Tile>().towerGrid;
+
+            if (occupiedGrid != currentTower.GetComponent<JH_Grid>().go_grid)
             {
-                return;
+                Debug.Log(gameObject + " in new tile zone.");
+
+                towerUnits = occupiedTower.GetComponent<AC_TowerStats>().towerUnits;
+
+                // Finds the unit in the tower array and removes it.
+                for (int i = 0; i < towerUnits.Length; i++)
+                {
+                    if (towerUnits[i] == gameObject)
+                    {
+                        Debug.Log(gameObject + " removed from " + occupiedTower);
+                        towerUnits[i] = null;
+                        currentTower = occupiedTower;
+                        break;
+                    }
+                }
+
+                towerUnits = occupiedTower.GetComponent<AC_TowerStats>().towerUnits;
+
+                // Sees if the unit is already in the tower array.
+                for (int i = 0; i < towerUnits.Length; i++)
+                {
+                    if (towerUnits[i] == gameObject)
+                    {
+                        Debug.Log(gameObject + " already in tower.");
+                        currentTower = occupiedTower;
+                        break;
+                    }
+                }
+
+                // Finds a space in the tower array for the unit and places it into the array.
+                for (int i = 0; i < towerUnits.Length; i++)
+                {
+                    Debug.Log(gameObject + " added to " + occupiedTower);
+
+                    if (towerUnits[i] == null)
+                    {
+                        towerUnits[i] = gameObject;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.Log(gameObject + "'s First Parenting");
+
+            occupiedTower = occupiedTile.GetComponent<JH_Tile>().towerGrid;
+
+            towerUnits = occupiedTower.GetComponent<AC_TowerStats>().towerUnits;
+
+            // Sees if the unit is already in the tower array.
+            for (int i = 0; i < towerUnits.Length; i++)
+            {
+                if (towerUnits[i] == gameObject)
+                {
+                    currentTower = occupiedTower;
+                    return;
+                }
+            }
+
+            // Finds a space in the tower array for the unit and places it into the array.
+            for (int i = 0; i < towerUnits.Length; i++)
+            {
+                if (towerUnits[i] == null)
+                {
+                    Debug.Log(gameObject + " added to " + occupiedTower);
+                    towerUnits[i] = gameObject;
+                    break;
+                }
             }
         }
 
-        // Finds a space in the tower array for the unit and places it into the array.
-        for (int i = 0; i < towerUnits.Length; i++)
-        {
-            if (towerUnits[i] == null)
-            {
-                towerUnits[i] = gameObject;
-                break;
-            }
-        }
+        currentTower = occupiedTower;
     }
 
     void UnitSelected()
