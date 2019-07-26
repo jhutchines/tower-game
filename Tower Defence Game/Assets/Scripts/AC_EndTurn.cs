@@ -30,12 +30,12 @@ public class AC_EndTurn : MonoBehaviour
         {
             turnCounter = 1;
 
-            if (firstTurn == true)
-            {
-                towerStats = GameObject.Find("Tower").GetComponent<AC_TowerStats>();
-                firstTurn = false;
-                towerStats.FirstTurnTiles();
-            }
+            //if (firstTurn == true)
+            //{
+            //    towerStats = GameObject.Find("Tower").GetComponent<AC_TowerStats>();
+            //    firstTurn = false;
+            //    towerStats.FirstTurnTiles();
+            //}
         }
         else
         {

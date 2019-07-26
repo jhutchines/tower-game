@@ -6,12 +6,11 @@ public class AC_AllTiles : MonoBehaviour
 {
     public GameObject allTiles;
     public GameObject[] allTileZones;
-    public int tiles;
+    private int tiles;
     public GameObject[] allTilesList;
-    public int currentZone; 
-    public GameObject[] currentZoneTiles;
-    public int currentTile;
-    public int currentNum;
+    private GameObject[] currentZoneTiles;
+    private int currentTile;
+    private int currentNum;
 
     // Start is called before the first frame update
     void Start()
@@ -36,13 +35,11 @@ public class AC_AllTiles : MonoBehaviour
 
             for (int i = 0; i < allTileZones.Length; i++)
             {
-                currentZone = allTileZones[i].transform.childCount;
-
-                currentZoneTiles = new GameObject[currentZone];
+                currentZoneTiles = new GameObject[allTileZones[i].transform.childCount];
 
                 currentTile = 0;
                
-                while (currentTile < currentZone)
+                while (currentTile < allTileZones[i].transform.childCount)
                 {                  
                     if (currentTile < allTiles.transform.GetChild(i).gameObject.transform.childCount)
                     {

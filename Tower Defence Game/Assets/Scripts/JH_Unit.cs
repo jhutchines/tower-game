@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class JH_Unit : MonoBehaviour
 {
+    private AC_AllTiles allTiles;
+    public GameObject[] towerUnits;
+
     public GameObject parentTower;
     public int onCurrentTile;
     public float fl_moveSpeed;
@@ -26,17 +29,19 @@ public class JH_Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        allTiles = GameObject.Find("AllTiles").GetComponent<AC_AllTiles>();
+
         animator = transform.GetChild(0).GetComponent<Animator>();
         gameManager = Camera.main.GetComponent<JH_Game_Manager>();
 
         // Finds the tile this unit is on when the game starts
-        for (int i = 0; i < parentTower.GetComponent<JH_Grid>().tileList.Length; i++)
+        for (int i = 0; i < allTiles.allTilesList.Length; i++)
         {
-            if (transform.position.x == parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x &&
-                transform.position.z == parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z)
+            if (transform.position.x == allTiles.allTilesList[i].transform.position.x &&
+                transform.position.z == allTiles.allTilesList[i].transform.position.z)
             {
                 onCurrentTile = i;
-                parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
+                allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
                 break;
             }
         }
@@ -85,68 +90,69 @@ public class JH_Unit : MonoBehaviour
     void CheckTiles()
     {
         // Checks to see what tile the unit is currently on
-        for (int i = 0; i < parentTower.GetComponent<JH_Grid>().tileList.Length; i++)
+        for (int i = 0; i < allTiles.allTilesList.Length; i++)
         {
-            if (transform.position.x == parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x &&
-                transform.position.z == parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z)
+            if (transform.position.x == allTiles.allTilesList[i].transform.position.x &&
+                transform.position.z == allTiles.allTilesList[i].transform.position.z)
             {
                 onCurrentTile = i;
-                parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
-            }
+                allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
+
+            }               
 
             // Checks surrounding tiles
-            if ((parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x + 1 == 
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z) ||
-                (parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x - 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z) || 
-                (parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z + 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x) ||
-                (parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z - 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x) ||
-                (parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z - 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x - 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x) ||
-                (parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z - 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x + 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x) ||
-                (parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z + 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x - 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x) ||
-                (parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z + 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z &&
-                parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x + 1 ==
-                parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x))
+            if ((allTiles.allTilesList[onCurrentTile].transform.position.x + 1 == 
+                allTiles.allTilesList[i].transform.position.x &&
+                allTiles.allTilesList[onCurrentTile].transform.position.z ==
+                allTiles.allTilesList[i].transform.position.z) ||
+                (allTiles.allTilesList[onCurrentTile].transform.position.x - 1 ==
+                allTiles.allTilesList[i].transform.position.x &&
+                allTiles.allTilesList[onCurrentTile].transform.position.z ==
+                allTiles.allTilesList[i].transform.position.z) || 
+                (allTiles.allTilesList[onCurrentTile].transform.position.z + 1 ==
+                allTiles.allTilesList[i].transform.position.z &&
+                allTiles.allTilesList[onCurrentTile].transform.position.x ==
+                allTiles.allTilesList[i].transform.position.x) ||
+                (allTiles.allTilesList[onCurrentTile].transform.position.z - 1 ==
+                allTiles.allTilesList[i].transform.position.z &&
+                allTiles.allTilesList[onCurrentTile].transform.position.x ==
+                allTiles.allTilesList[i].transform.position.x) ||
+                (allTiles.allTilesList[onCurrentTile].transform.position.z - 1 ==
+                allTiles.allTilesList[i].transform.position.z &&
+                allTiles.allTilesList[onCurrentTile].transform.position.x - 1 ==
+                allTiles.allTilesList[i].transform.position.x) ||
+                (allTiles.allTilesList[onCurrentTile].transform.position.z - 1 ==
+                allTiles.allTilesList[i].transform.position.z &&
+                allTiles.allTilesList[onCurrentTile].transform.position.x + 1 ==
+                allTiles.allTilesList[i].transform.position.x) ||
+                (allTiles.allTilesList[onCurrentTile].transform.position.z + 1 ==
+                allTiles.allTilesList[i].transform.position.z &&
+                allTiles.allTilesList[onCurrentTile].transform.position.x - 1 ==
+                allTiles.allTilesList[i].transform.position.x) ||
+                (allTiles.allTilesList[onCurrentTile].transform.position.z + 1 ==
+                allTiles.allTilesList[i].transform.position.z &&
+                allTiles.allTilesList[onCurrentTile].transform.position.x + 1 ==
+                allTiles.allTilesList[i].transform.position.x))
             {
 
-                if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color != gameManager.m_canMove.color &&
-                    parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileY <= fl_climbAmount / 2)
+                if (allTiles.allTilesList[i].GetComponent<Renderer>().material.color != gameManager.m_canMove.color &&
+                    allTiles.allTilesList[i].GetComponent<JH_Tile>().tileY <= fl_climbAmount / 2)
                 {
-                    if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied != null)
+                    if (allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied != null)
                     {
                         // Sets tile to red if occupied by an enemy unit
-                        if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied.GetComponent<JH_Unit>().unitOwnership
+                        if (allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied.GetComponent<JH_Unit>().unitOwnership
                         == JH_Game_Manager.unitOwnership.Enemy)
                         {
-                            parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color = gameManager.m_canAttack.color;
+                            allTiles.allTilesList[i].GetComponent<Renderer>().material.color = gameManager.m_canAttack.color;
                         }
                         // Allows friendly units to swap places if they have enough moves left
                         else
                         {
-                            if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied.GetComponent<JH_Unit>().in_movement
+                            if (allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied.GetComponent<JH_Unit>().in_movement
                                 > 0 && in_movement > 0)
                             {
-                                parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color = gameManager.m_checkMove.color;
+                                allTiles.allTilesList[i].GetComponent<Renderer>().material.color = gameManager.m_checkMove.color;
                             }
                         }
                     }
@@ -155,15 +161,15 @@ public class JH_Unit : MonoBehaviour
                         // Sets tile to green if unit can move there
                         if (in_movement > 0)
                         {
-                            parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color = gameManager.m_checkMove.color;
+                            allTiles.allTilesList[i].GetComponent<Renderer>().material.color = gameManager.m_checkMove.color;
                         }
                         // Removes tile colour if not able to attack or move there
                         else
                         {
-                            if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color != gameManager.m_cannotMove.color)
+                            if (allTiles.allTilesList[i].GetComponent<Renderer>().material.color != gameManager.m_cannotMove.color)
                             {
-                                parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color =
-                                parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().c_startColor;
+                                allTiles.allTilesList[i].GetComponent<Renderer>().material.color =
+                                allTiles.allTilesList[i].GetComponent<JH_Tile>().c_startColor;
                             }
                         }
                     }
@@ -172,49 +178,75 @@ public class JH_Unit : MonoBehaviour
             else
             {
                 // Sets tile to original colour if not next to unit
-                if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color !=
+                if (allTiles.allTilesList[i].GetComponent<Renderer>().material.color !=
                     gameManager.m_cannotMove.color)
                 {
-                    parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color =
-                        parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().c_startColor;
+                    allTiles.allTilesList[i].GetComponent<Renderer>().material.color =
+                        allTiles.allTilesList[i].GetComponent<JH_Tile>().c_startColor;
                 }
             }
 
             // Checks to see if an enemy is within range, and sets tile to red if so
             if (GetComponent<JH_UnitAttack>().fl_range > 1)
             {
-                if ((parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x <= 
-                    parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x + GetComponent<JH_UnitAttack>().fl_range &&
-                        parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.x >= 
-                        parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x - GetComponent<JH_UnitAttack>().fl_range) &&
-                        (parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z <= 
-                        parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z + GetComponent<JH_UnitAttack>().fl_range &&
-                        parentTower.GetComponent<JH_Grid>().tileList[i].transform.position.z >= 
-                        parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z - GetComponent<JH_UnitAttack>().fl_range))
+                if ((allTiles.allTilesList[i].transform.position.x <= 
+                    allTiles.allTilesList[onCurrentTile].transform.position.x + GetComponent<JH_UnitAttack>().fl_range &&
+                        allTiles.allTilesList[i].transform.position.x >= 
+                        allTiles.allTilesList[onCurrentTile].transform.position.x - GetComponent<JH_UnitAttack>().fl_range) &&
+                        (allTiles.allTilesList[i].transform.position.z <= 
+                        allTiles.allTilesList[onCurrentTile].transform.position.z + GetComponent<JH_UnitAttack>().fl_range &&
+                        allTiles.allTilesList[i].transform.position.z >= 
+                        allTiles.allTilesList[onCurrentTile].transform.position.z - GetComponent<JH_UnitAttack>().fl_range))
                 {
                     
-                    if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied != null)
+                    if (allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied != null)
                     {
-                        if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied.GetComponent<JH_Unit>().unitOwnership ==
+                        if (allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied.GetComponent<JH_Unit>().unitOwnership ==
                         JH_Game_Manager.unitOwnership.Enemy)
                         {
-                            parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color = gameManager.m_canAttack.color;
+                            allTiles.allTilesList[i].GetComponent<Renderer>().material.color = gameManager.m_canAttack.color;
                         }
                     }
 
                     // Sets tile back to original colour
                     else
                     {
-                        if (parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color == gameManager.m_canAttack.color)
+                        if (allTiles.allTilesList[i].GetComponent<Renderer>().material.color == gameManager.m_canAttack.color)
                         {
-                            parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<Renderer>().material.color =
-                            parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().c_startColor;
+                            allTiles.allTilesList[i].GetComponent<Renderer>().material.color =
+                            allTiles.allTilesList[i].GetComponent<JH_Tile>().c_startColor;
                         }
                     }
                 }
             }
         }
-        
+
+        // Checks to see what tiles parent is and add the unit to the towers unit array.
+        ParentTowerUpdate();
+    }
+
+    void ParentTowerUpdate()
+    {       
+        towerUnits = parentTower.GetComponent<AC_TowerStats>().towerUnits;
+
+        // Sees if the unit is already in the tower array.
+        for (int i = 0; i < towerUnits.Length; i++)
+        {
+            if (towerUnits[i] == gameObject)
+            {
+                return;
+            }
+        }
+
+        // Finds a space in the tower array for the unit and places it into the array.
+        for (int i = 0; i < towerUnits.Length; i++)
+        {
+            if (towerUnits[i] == null)
+            {
+                towerUnits[i] = gameObject;
+                break;
+            }
+        }
     }
 
     void UnitSelected()
@@ -235,19 +267,19 @@ public class JH_Unit : MonoBehaviour
                         {
                             go_changePlaces = hit.transform.GetComponent<JH_Tile>().tileOccupied;
                             go_changePlaces.GetComponent<JH_Unit>().v3_moveTowards =
-                            new Vector3(parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.x,
+                            new Vector3(allTiles.allTilesList[onCurrentTile].transform.position.x,
                                         go_changePlaces.transform.position.y,
-                                        parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].transform.position.z);
+                                        allTiles.allTilesList[onCurrentTile].transform.position.z);
                         }
 
                         // Sets current tile as unoccupied and sets new tile to occupied
-                        parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].GetComponent<JH_Tile>().tileOccupied = null;
-                        for (int i = 0; i < parentTower.GetComponent<JH_Grid>().tileList.Length; i++)
+                        allTiles.allTilesList[onCurrentTile].GetComponent<JH_Tile>().tileOccupied = null;
+                        for (int i = 0; i < allTiles.allTilesList.Length; i++)
                         {
-                            if (hit.transform.gameObject == parentTower.GetComponent<JH_Grid>().tileList[i])
+                            if (hit.transform.gameObject == allTiles.allTilesList[i])
                             {
                                 onCurrentTile = i;
-                                parentTower.GetComponent<JH_Grid>().tileList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
+                                allTiles.allTilesList[i].GetComponent<JH_Tile>().tileOccupied = gameObject;
                                 break;
                             }
                         }
@@ -321,7 +353,7 @@ public class JH_Unit : MonoBehaviour
     // Unit stays on the map for a time after dying
     IEnumerator DeathSequence()
     {
-        parentTower.GetComponent<JH_Grid>().tileList[onCurrentTile].GetComponent<JH_Tile>().tileOccupied = null;
+        allTiles.allTilesList[onCurrentTile].GetComponent<JH_Tile>().tileOccupied = null;
         yield return new WaitForSeconds(5);
         v3_deathMove = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
         bl_deathSequence = true;

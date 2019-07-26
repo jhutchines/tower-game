@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class AC_TowerStats : MonoBehaviour
 {
+    private JH_Game_Manager.unitOwnership unitOwnership;
+
     public int towerHealth;
     public GameObject[] buildTowers;
     public Material playerTowerMat;
-    public Material playerZoneMat;
+    public Material enemyTowerMat;
+    public GameObject towerFlag;
     public GameObject[] towerUnits;
     private AC_EndTurn endTurn;
     public GameObject spawnUnit;
-    public GameObject[] storedUnit;
+    //public GameObject[] storedUnit;
     public int currentTurn;
     public int currentNum;
     public GameObject opposingTower;
@@ -36,8 +39,12 @@ public class AC_TowerStats : MonoBehaviour
     //Spawn Locations.
     //private AC_UnitZoneSetting unitZoneSetting;
     private JH_Tile tiles;
+    public GameObject towerTiles;
+    private GameObject[] currentZoneTiles;
+    private int currentTile;
+    private int currentTileNum;
     public GameObject[] settingTiles;
-    public GameObject[] firstTurnTiles;
+    //public GameObject[] firstTurnTiles;
     public GameObject chosenTile;
     public bool unitSetting;
     public Vector3 setPosition;
@@ -54,15 +61,46 @@ public class AC_TowerStats : MonoBehaviour
         //unitZoneSetting = GameObject.Find("UnitZones").GetComponent<AC_UnitZoneSetting>();
         currentNum = newUnits;
 
-        //if (firstTurnTiles.Length == 0)
-        //{
-        //    firstTurnTiles = new GameObject[go_grid.transform.childCount];
-        //    for (int i = 0; i < firstTurnTiles.Length; i++)
-        //    {
-        //        firstTurnTiles[i] = go_grid.transform.GetChild(i).gameObject;
-        //        firstTurnTiles[i].GetComponent<JH_Tile>().towerGrid = gameObject;
-        //    }
-        //}
+        // Set the spawnable locations to an array.
+        if (settingTiles.Length == 0)
+        {
+            settingTiles = new GameObject[towerTiles.transform.childCount];
+
+            for (int i = 0; i < settingTiles.Length; i++)
+            {
+                currentZoneTiles = new GameObject[towerTiles.transform.childCount];
+
+                currentTile = 0;
+
+                while (currentTile < towerTiles.transform.childCount)
+                {
+                    if (currentTile < towerTiles.transform.childCount)
+                    {
+                        currentZoneTiles[currentTile] = towerTiles.transform.GetChild(currentTile).gameObject;
+                        currentTile += 1;
+                    }
+                }
+
+                currentNum = currentTile;
+
+                for (int j = 0; j < currentZoneTiles.Length; j++)
+                {
+                    for (int k = 0; k < settingTiles.Length; k++)
+                    {
+                        if (settingTiles[k] == null)
+                        {
+                            settingTiles[k] = currentZoneTiles[j];
+                            break;
+                        }
+                    }
+                }
+
+                for (int j = 0; j < currentZoneTiles.Length; j++)
+                {
+                    currentZoneTiles[j] = null;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -94,38 +132,73 @@ public class AC_TowerStats : MonoBehaviour
 
     public void TowerDeath()
     {
-        if (towerHealth <= 0)
+
+        if (towerHealth <= 0 && gameObject.layer == 10)
         {
+            Debug.Log(gameObject + " destroyed!");
             KillUnits();
-            gameObject.GetComponent<Renderer>().material = playerTowerMat;
+            towerFlag.GetComponent<Renderer>().material = playerTowerMat;
             gameObject.layer = 9;
-            //transform.Find("Zone").GetComponent<Renderer>().material = playerZoneMat;
-            //transform.Find("Zone").gameObject.layer = 11;
+            SpawnTowers();
+        }
+        else if (towerHealth <= 0 && gameObject.layer == 10)
+        {
+            Debug.Log(gameObject + " destroyed!");
+            KillUnits();
+            towerFlag.GetComponent<Renderer>().material = enemyTowerMat;
+            gameObject.layer = 10;
             SpawnTowers();
         }
     }
 
     void KillUnits()
     {
+        if (gameObject.layer == 9)
+        {
+            for (int i = 0; i < towerUnits.Length; i++)
+            {
+                if (towerUnits[i].GetComponent<JH_Unit>().unitOwnership == JH_Game_Manager.unitOwnership.Enemy)
+                {
+                    if (towerUnits[i].GetComponent<JH_UnitAttack>().unitType == JH_Game_Manager.unitType.Peasant)
+                    {
+                        opposingTower.GetComponent<AC_TowerStats>().peasantNum += 1;
+                        Destroy(towerUnits[i]);
+                    }
+                    else if (towerUnits[i].GetComponent<JH_UnitAttack>().unitType == JH_Game_Manager.unitType.Swordsman)
+                    {
+                        opposingTower.GetComponent<AC_TowerStats>().soldierNum += 1;
+                        Destroy(towerUnits[i]);
+                    }
+                }
+
+                if (towerUnits[i].GetComponent<JH_Unit>().unitOwnership == JH_Game_Manager.unitOwnership.Player)
+                {
+                    Destroy(towerUnits[i]);
+                }
+            }
+        }
+
         if (gameObject.layer == 10)
         {
             for (int i = 0; i < towerUnits.Length; i++)
             {
                 if (towerUnits[i] != null)
                 {
-                    if (towerUnits[i].layer == 13)
+                    if (towerUnits[i].GetComponent<JH_Unit>().unitOwnership == JH_Game_Manager.unitOwnership.Player)
                     {
-                        for (int j = 0; j < storedUnit.Length; j++)
+                        if (towerUnits[i].GetComponent<JH_UnitAttack>().unitType == JH_Game_Manager.unitType.Peasant)
                         {
-                            if (storedUnit == null)
-                            {
-                                storedUnit[i] = towerUnits[j];
-                                storedUnit[i].SetActive(false);
-                            }
-                        }                   
+                            opposingTower.GetComponent<AC_TowerStats>().peasantNum += 1;
+                            Destroy(towerUnits[i]);
+                        }
+                        else if (towerUnits[i].GetComponent<JH_UnitAttack>().unitType == JH_Game_Manager.unitType.Swordsman)
+                        {
+                            opposingTower.GetComponent<AC_TowerStats>().soldierNum += 1;
+                            Destroy(towerUnits[i]);
+                        }
                     }
 
-                    if (towerUnits[i].layer == 14)
+                    if (towerUnits[i].GetComponent<JH_Unit>().unitOwnership == JH_Game_Manager.unitOwnership.Enemy)
                     {
                         Destroy(towerUnits[i]);
                     }
@@ -343,18 +416,18 @@ public class AC_TowerStats : MonoBehaviour
         }
     }
 
-    public void FirstTurnTiles()
-    {
-        Debug.Log("Turning off tiles");
+    //public void FirstTurnTiles()
+    //{
+    //    Debug.Log("Turning off tiles");
 
-        for (int i = 0; i < firstTurnTiles.Length; i++)
-        {
-            if (firstTurnTiles[i].GetComponent<JH_Tile>().initialBattleMove)
-            {
-                firstTurnTiles[i].layer = 0;
-            }
-        }
-    }
+    //    for (int i = 0; i < firstTurnTiles.Length; i++)
+    //    {
+    //        if (firstTurnTiles[i].GetComponent<JH_Tile>().initialBattleMove)
+    //        {
+    //            firstTurnTiles[i].layer = 0;
+    //        }
+    //    }
+    //}
 
     public void SettablePositions()
     {
@@ -365,10 +438,10 @@ public class AC_TowerStats : MonoBehaviour
             gameObject.GetComponent<JH_Grid>().spawningUnit = true;
 
             // Turns the availble tiles green.
-            for (int i = 0; i < firstTurnTiles.Length; i++)
+            for (int i = 0; i < settingTiles.Length; i++)
             {
-                Debug.Log("Tile Turning");
-                firstTurnTiles[i].GetComponent<JH_Tile>().Spawning();
+                    Debug.Log("Tile Turning");
+                    settingTiles[i].GetComponent<JH_Tile>().Spawning();
             }
 
             //
@@ -383,8 +456,11 @@ public class AC_TowerStats : MonoBehaviour
             // Turns the availble tiles green.
             for (int i = 0; i < settingTiles.Length; i++)
             {
-                Debug.Log("Tile Turning");
-                settingTiles[i].GetComponent<JH_Tile>().Spawning();
+                if (settingTiles[i].GetComponent<JH_Tile>().initialBattleMove == false)
+                {
+                    Debug.Log("Tile Turning");
+                    settingTiles[i].GetComponent<JH_Tile>().Spawning();
+                }
             }
 
             //
